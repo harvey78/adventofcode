@@ -6,7 +6,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace adventofcode
+namespace adventofcode.Y_2022
 {
     internal class Day_01
     {
@@ -21,7 +21,7 @@ namespace adventofcode
 
 
             List<int> calories = new List<int>();
-            foreach (string line in System.IO.File.ReadLines(@"input_01.txt"))
+            foreach (string line in File.ReadLines(@"Y_2022\input_01.txt"))
             {
                 if (line.Trim() == "")
                 {

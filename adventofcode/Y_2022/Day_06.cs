@@ -7,7 +7,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace adventofcode
+namespace adventofcode.Y_2022
 {
     internal class Day_06
     {
@@ -20,7 +20,7 @@ namespace adventofcode
 
             int Marcatore1 = 0;
             int Marcatore2 = 0;
-            string line = File.ReadLines("input_06.txt").First();
+            string line = File.ReadLines("Y_2022\\input_06.txt").First();
             char[] chars = line.ToCharArray();
 
 

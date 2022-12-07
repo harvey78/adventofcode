@@ -7,7 +7,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace adventofcode
+namespace adventofcode.Y_2022
 {
     internal class Day_04
     {
@@ -23,7 +23,7 @@ namespace adventofcode
 
             List<string> lines = new List<string>();
 
-            foreach (string line in File.ReadLines("input_04.txt"))
+            foreach (string line in File.ReadLines("Y_2022\\input_04.txt"))
                 lines.Add(line);
 
             //**********************************
@@ -38,14 +38,14 @@ namespace adventofcode
                 int Min2 = int.Parse(partB[0]);
                 int Max2 = int.Parse(partB[1]);
 
-                if ((Min1 >= Min2 && Max1 <= Max2) ||
-                     (Min1 <= Min2 && Max1 >= Max2))
+                if (Min1 >= Min2 && Max1 <= Max2 ||
+                     Min1 <= Min2 && Max1 >= Max2)
                 {
                     Punteggio1++;
                     Punteggio2++;
                 }
-                else if ((Min1 >= Min2 && Min1 <= Max2) ||
-                    (Max1 >= Min2 && Max1 <= Max2))
+                else if (Min1 >= Min2 && Min1 <= Max2 ||
+                    Max1 >= Min2 && Max1 <= Max2)
                     Punteggio2++;
 
             }

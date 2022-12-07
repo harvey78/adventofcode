@@ -7,7 +7,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace adventofcode
+namespace adventofcode.Y_2022
 {
     internal class Day_05
     {
@@ -21,7 +21,7 @@ namespace adventofcode
 
             List<string> lines = new List<string>();
 
-            foreach (string line in File.ReadLines("input_05.txt"))
+            foreach (string line in File.ReadLines("Y_2022\\input_05.txt"))
                 lines.Add(line);
 
             List<Stack<char>> stacks1 = new();
@@ -35,7 +35,7 @@ namespace adventofcode
                 for (int r = 0; r < 8; r++)
                 {
                     string str = lines[7 - r].Substring(1 + 4 * c, 1);
-                    if(str!=" ")
+                    if (str != " ")
                     {
                         stack1.Push(str[0]);
                         stack2.Push(str[0]);
@@ -58,19 +58,19 @@ namespace adventofcode
 
                 for (int i = 0; i < Num; i++)
                 {
-                    char c= stacks1[PosForm- 1].Pop();
+                    char c = stacks1[PosForm - 1].Pop();
                     stacks1[PosTo - 1].Push(c);
                 }
 
 
-                Stack<char>  stackTemp = new();
+                Stack<char> stackTemp = new();
 
                 for (int i = 0; i < Num; i++)
-                    stackTemp.Push ( stacks2[PosForm - 1].Pop());
+                    stackTemp.Push(stacks2[PosForm - 1].Pop());
 
                 for (int i = 0; i < Num; i++)
-                    stacks2[PosTo - 1].Push(stackTemp.Pop ());
-                
+                    stacks2[PosTo - 1].Push(stackTemp.Pop());
+
 
             }
 

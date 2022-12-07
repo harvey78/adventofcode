@@ -7,7 +7,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace adventofcode
+namespace adventofcode.Y_2022
 {
     internal class Day_03
     {
@@ -24,7 +24,7 @@ namespace adventofcode
             List<char> charList = new List<char>();
             List<string> lines = new List<string>();
 
-            foreach (string line in System.IO.File.ReadLines(@"input_03.txt"))
+            foreach (string line in File.ReadLines(@"Y_2022\input_03.txt"))
                 lines.Add(line);
 
             //**********************************
@@ -60,7 +60,7 @@ namespace adventofcode
                 char[] charts3 = lines[i * 3 + 2].ToCharArray();
                 char[] charts4 = equalChar(charts1, charts2);
                 char[] charts5 = equalChar(charts3, charts4);
-                charList.AddRange(charts5);    
+                charList.AddRange(charts5);
 
             }
 
@@ -85,11 +85,11 @@ namespace adventofcode
 
 
         static char[] equalChar(char[] c1, char[] c2)
-        { 
+        {
             List<char> equal = new List<char>();
 
             foreach (var c in c1)
-                if (c2.Contains(c)  && !equal.Contains(c))
+                if (c2.Contains(c) && !equal.Contains(c))
                     equal.Add(c);
 
             return equal.ToArray();

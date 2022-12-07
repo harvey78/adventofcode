@@ -1,13 +1,14 @@
 ﻿// See https://aka.ms/new-console-template for more information
-using adventofcode;
 
 
 Console.WriteLine("adventofcode.com");
+Console.WriteLine("2015");
 
-
-Day_01.run();
-Day_02.run();
-Day_03.run();
-Day_04.run();
-Day_05.run();
-Day_06.run();
+Console.WriteLine("2022");
+adventofcode.Y_2022.Day_01.run();
+adventofcode.Y_2022.Day_02.run();
+adventofcode.Y_2022.Day_03.run();
+adventofcode.Y_2022.Day_04.run();
+adventofcode.Y_2022.Day_05.run();
+adventofcode.Y_2022.Day_06.run();
+adventofcode.Y_2022.Day_07.run();

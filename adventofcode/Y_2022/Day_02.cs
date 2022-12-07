@@ -6,7 +6,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace adventofcode
+namespace adventofcode.Y_2022
 {
     internal class Day_02
     {
@@ -31,7 +31,7 @@ namespace adventofcode
             List<Tuple<Simboli, Simboli>> azioni1 = new();
             List<Tuple<Simboli, Simboli>> azioni2 = new();
 
-            foreach (string line in System.IO.File.ReadLines(@"input_02.txt"))
+            foreach (string line in File.ReadLines(@"Y_2022\input_02.txt"))
             {
                 Simboli s1;
 
@@ -70,15 +70,15 @@ namespace adventofcode
                         return;
                 }
 
-                azioni1.Add(new Tuple<Simboli, Simboli> (s1,s2));
- 
+                azioni1.Add(new Tuple<Simboli, Simboli>(s1, s2));
+
             }
 
 
             Punteggio1 = getPunteggio(azioni1);
 
             //X significa che devi perdere, Y significa che devi concludere il round con un pareggio e Z significa che devi vincere
-            foreach (string line in System.IO.File.ReadLines(@"input_02.txt"))
+            foreach (string line in File.ReadLines(@"Y_2022\input_02.txt"))
             {
                 Simboli s1;
 
@@ -110,7 +110,7 @@ namespace adventofcode
                             s2 = Simboli.Forbici;
                         else if (s1 == Simboli.Forbici)
                             s2 = Simboli.Carta;
-                        else if(s1 == Simboli.Carta)
+                        else if (s1 == Simboli.Carta)
                             s2 = Simboli.Sasso;
                         else
                             return;
@@ -137,7 +137,7 @@ namespace adventofcode
                 }
 
                 azioni2.Add(new Tuple<Simboli, Simboli>(s1, s2));
-  
+
             }
             Punteggio2 = getPunteggio(azioni2);
 
@@ -153,21 +153,22 @@ namespace adventofcode
         }
 
 
-        static private int getPunteggio(List<Tuple<Simboli, Simboli>> azioni ){
+        static private int getPunteggio(List<Tuple<Simboli, Simboli>> azioni)
+        {
             int Punteggio = 0;
 
             //Calcolo vittoria
             //(0 se si è perso, 3 se si è pareggiato e 6 se si è vinto).
             foreach (var a in azioni)
             {
-                if ((a.Item1 == Simboli.Sasso && a.Item2 == Simboli.Sasso) ||
-                    (a.Item1 == Simboli.Carta && a.Item2 == Simboli.Carta) ||
-                    (a.Item1 == Simboli.Forbici && a.Item2 == Simboli.Forbici))
+                if (a.Item1 == Simboli.Sasso && a.Item2 == Simboli.Sasso ||
+                    a.Item1 == Simboli.Carta && a.Item2 == Simboli.Carta ||
+                    a.Item1 == Simboli.Forbici && a.Item2 == Simboli.Forbici)
                     Punteggio += 3;
 
-                if ((a.Item1 == Simboli.Forbici && a.Item2 == Simboli.Sasso) ||
-                    (a.Item1 == Simboli.Sasso && a.Item2 == Simboli.Carta) ||
-                    (a.Item1 == Simboli.Carta && a.Item2 == Simboli.Forbici))
+                if (a.Item1 == Simboli.Forbici && a.Item2 == Simboli.Sasso ||
+                    a.Item1 == Simboli.Sasso && a.Item2 == Simboli.Carta ||
+                    a.Item1 == Simboli.Carta && a.Item2 == Simboli.Forbici)
                     Punteggio += 6;
 
             }
