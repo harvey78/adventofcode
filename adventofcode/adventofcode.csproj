@@ -31,4 +31,8 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Y_2015\" />
+  </ItemGroup>
+
 </Project>

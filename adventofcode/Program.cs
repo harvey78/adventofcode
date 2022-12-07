@@ -2,7 +2,7 @@
 
 
 Console.WriteLine("adventofcode.com");
-Console.WriteLine("2015");
+
 
 Console.WriteLine("2022");
 adventofcode.Y_2022.Day_01.run();
