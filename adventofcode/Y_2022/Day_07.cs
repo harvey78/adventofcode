@@ -1,67 +1,155 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Diagnostics.Metrics;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Runtime.ConstrainedExecution;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿using System.Diagnostics;
 
-namespace adventofcode.Y_2022
+namespace adventofcode.Y_2022;
+
+internal class Day_07
 {
-    internal class Day_07
+
+
+    static public void run()
     {
 
+        Console.WriteLine("Avvio giorno 7");
 
-        static public void run()
-        {
+        List<string> lines = new();
+        FS_Directory root = new("", null);
+        FS_Directory actual = new("", null);
 
-            Console.WriteLine("Avvio giorno 7");
-
-            int Marcatore1 = 0;
-            int Marcatore2 = 0;
-            List<string> lines = new List<string>();
-
-            foreach (string line in File.ReadLines("Y_2022\\input_07.txt"))
-                lines.Add(line);
+        foreach (string line in File.ReadLines("Y_2022\\input_07.txt"))
+            lines.Add(line);
 
 
-            //  cd significa cambiare directory. Cambia la directory corrente, ma il risultato specifico dipende dall'argomento:
-            //  cd x si sposta di un livello: cerca nella directory corrente la directory denominata x e la rende la directory corrente.
-            //  cd..si sposta di un livello: trova la directory che contiene la directory corrente e la rende tale.
-            //  cd / cambia la directory corrente in quella più esterna, /.
-            //  ls significa elenco.Stampa tutti i file e le directory immediatamente contenuti nella directory corrente:
-            //  123 abc significa che la directory corrente contiene un file di nome abc di dimensioni 123.
-            //  dir xyz significa che la directory corrente contiene una directory di nome xyz.
-            //  Dati i comandi e l'output dell'esempio precedente, è possibile determinare che il filesystem
+        foreach (var l in lines)
+            if (l.StartsWith('$'))
+            {//Comando
 
-
-            foreach (var l in lines)
-                if (l.StartsWith('$'))
+                if (l == "$ cd /")
                 {
+                    //Inizio
+                    root = new("", null);
+                    actual = root;
+                }
+                else if (l == "$ cd ..")
+                {
+                    actual = actual.parent;
+                }
+                else if (l == "$ ls")
+                {
+                }
+                else if (l.StartsWith("$ cd"))
+                {
+                    string dirName = l.Split(' ')[2];
+                    bool find = false;
+                    foreach (var i in actual.Directory)
+                    {
+                        if (i.Name == dirName)
+                        {
+                            actual = i;
+                            find = true;
+                            break;
+                        }
+                    }
+                    if (!find)
+                        Debugger.Break();
 
                 }
                 else
+                    Debugger.Break();
+
+            }
+            else
+            {//Risposta  
+
+                if (l.StartsWith("dir"))
                 {
-
+                    //aggiungo directory 
+                    actual.Directory.Add(new FS_Directory(l.Substring(4), actual));
                 }
+                else
+                {
+                    //aggiungo file 
+                    string[] column = l.Split(' ');
+                    int size = int.Parse(column[0]);
+                    actual.File.Add(new FS_File(column[1], size));
+                }
+            }
+
+        root.calculateSize();
+        int totalSpace = 70000000;
+        int NeedSpace = 30000000;
+        int ToDelete =  (NeedSpace + root.Size)- 70000000;
+        int maxSpace = int.MaxValue;
+        intGetSizeToDelete(root, ToDelete, ref maxSpace);
+
+        // 1886043
+        Console.WriteLine("Totalsize <= 100000        " + intGetTotalSize_Under_100000(root));
+        // 3842121
+        Console.WriteLine("Size to delete             " + maxSpace);
 
 
+        Console.WriteLine("******************************************* ");
 
+    }
 
-            Console.WriteLine("Marcatore 1  " + Marcatore1);
-            Console.WriteLine("Marcatore 2  " + Marcatore2);
+    static int  intGetTotalSize_Under_100000(FS_Directory actual)
+    {
+        int Size=0;
 
+        if (actual.Size <= 100000)
+            Size += actual.Size;
 
+        foreach (var i in actual.Directory)
+            Size += intGetTotalSize_Under_100000(i);
 
-            Console.WriteLine("******************************************* ");
+            return Size;
+    }
 
+    static void intGetSizeToDelete(FS_Directory actual, int ToDelete,ref int maxSpace)
+    {
+        if (actual.Size >= ToDelete && actual.Size <= maxSpace)          
+            maxSpace = actual.Size;
+
+        foreach (var i in actual.Directory)
+            intGetSizeToDelete(i, ToDelete, ref maxSpace);
+    }
+
+    class FS_Directory
+    {
+        public string Name;
+        public int Size;
+        public List<FS_Directory> Directory = new();
+        public List<FS_File> File = new();
+        public FS_Directory? parent;
+
+        public FS_Directory(string Name, FS_Directory? parent)
+        {
+            this.Name = Name;
+            this.parent = parent;
         }
 
+        public void calculateSize()
+        {
+            Size = 0;
+            foreach (var i in Directory)
+            {
+                i.calculateSize();
+                Size += i.Size;
+            }
+            foreach (var i in File)
+                Size += i.Size;
+        }
+    }
 
+    class FS_File
+    {
+        public string Name;
+        public int Size;
+
+        public FS_File(string Name, int Size)
+        {
+            this.Name = Name;
+            this.Size = Size;
+        }
     }
 
 }
