@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace adventofcode.Y_2022;
+﻿namespace adventofcode.Y_2022;
 
 internal class Day_08
 {
@@ -34,45 +32,23 @@ internal class Day_08
         int Panorama = 0;
 
         for (int r = 0; r < Bosco.Length; r++)
-        {
             for (int c = 0; c < Bosco[r].Length; c++)
-            {
                 if (SeVisto(Bosco, r, c))
-                {
                     Trees++;
-                    //Console.ForegroundColor = ConsoleColor.Green;
-                }
-                //else
-                    //Console.ForegroundColor = ConsoleColor.Red;
-                //Console.Write(Bosco[r][c]);
-            }
-            //Console.WriteLine("");
-        }
-        //Console.ForegroundColor = ConsoleColor.Gray;
 
-        Console.WriteLine("******************************************* ");
 
         for (int r = 0; r < Bosco.Length; r++)
-        {
             for (int c = 0; c < Bosco[r].Length; c++)
             {
                 Panorama = CalcolaPanorama(Bosco, r, c);
-                //Console.Write(Panorama.ToString("00 "));
                 if (Panorama > PanoramaMassimo)
                     PanoramaMassimo = Panorama;
-
             }
-            //Console.WriteLine("");
-        }
-
 
         Console.ForegroundColor = ConsoleColor.Gray;
         Console.WriteLine("alberi visibili         " + Trees);
         Console.WriteLine("Panorama massimo        " + PanoramaMassimo);
-
-
         Console.WriteLine("******************************************* ");
-
     }
 
     static private bool SeVisto(int[][] Bosco, int r, int c)

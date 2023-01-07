@@ -13,3 +13,5 @@ adventofcode.Y_2022.Day_05.run();
 adventofcode.Y_2022.Day_06.run();
 adventofcode.Y_2022.Day_07.run();
 adventofcode.Y_2022.Day_08.run();
+adventofcode.Y_2022.Day_09.run();
+adventofcode.Y_2022.Day_10.run();

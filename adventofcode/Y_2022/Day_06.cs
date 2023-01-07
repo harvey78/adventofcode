@@ -42,7 +42,7 @@ internal class Day_06
 
 
         Console.WriteLine("Marcatore 1   " + Marcatore1);
-        Console.WriteLine("Marcatore 2  " + Marcatore2);
+        Console.WriteLine("Marcatore 2   " + Marcatore2);
 
 
 
