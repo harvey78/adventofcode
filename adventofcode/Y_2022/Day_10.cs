@@ -21,7 +21,6 @@ internal class Day_10
         foreach (string line in File.ReadLines("Y_2022\\input_10.txt"))
             lines.Add(line);
 
-        // 20th, 60th, 100th, 140th, 180th, and 220th cycles
 
         registers.Add(register);
 
@@ -64,11 +63,6 @@ internal class Day_10
                 pos = 0;
             }
         }
-
-
-        Console.WriteLine("");
-
-        //Console.WriteLine("Numero visite 2        " + VisitList2.Count);
 
 
         Console.WriteLine("******************************************* ");
